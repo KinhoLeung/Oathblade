@@ -1,14 +1,14 @@
 ---
 title: WSL2连接USB存储设备
 published: 2024-08-19
-description: 'WSL2连接USB存储设备'
+description: '开发环境搭建'
 image: ''
 tags: [WSL2, USB]
 category: 'Blog'
 draft: false 
 ---
 
-最近在使用WSL2作为我的Linux开发环境，不过在我尝试将bin文件烧录到SD卡（这里我是通过USB读卡器连接到电脑上）上时，发现SD没有被挂载上，去网上找了下原因。发现主要是以下2个原因导致的：
+最近在使用WSL2作为我的开发环境，不过在我尝试将bin文件烧录到SD卡（这里我是通过USB读卡器连接到电脑上）上时，发现SD没有被挂载上，去网上找了下原因。发现主要是以下2个原因导致的：
 
 * **WSL2本质是一个虚拟机，无法直接访问宿主主机的USB设备。**
 * **WSL2的内核没有加入USB存储设备的驱动。**
