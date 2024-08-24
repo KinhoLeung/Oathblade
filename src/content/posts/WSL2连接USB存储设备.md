@@ -1,116 +1,128 @@
 ---
 title: WSL2连接USB存储设备
 published: 2024-08-19
-description: '本文介绍了如何在WSL2环境中连接USB存储设备，主要涉及了两个问题：WSL2无法直接访问宿主机USB设备和内核缺少USB存储设备驱动。解决方案包括使用usbipd-win工具连接USB设备以及重新编译WSL2内核以支持USB存储设备，从而实现USB设备在WSL2中的成功挂载。'
+description: '本文详细介绍了如何在WSL2环境中连接USB存储设备,解决了WSL2无法直接访问宿主机USB设备和内核缺少USB存储设备驱动的问题。通过使用usbipd-win工具和重新编译WSL2内核,实现了USB设备在WSL2中的成功挂载。'
 image: ''
-tags: [WSL2, USB]
-category: '搭建开发环境'
+tags: [开发环境, WSL2, USB]
+category: '软件开发'
 draft: false 
 ---
 
+## 目录
+- [问题背景](#问题背景)
+- [解决方案](#解决方案)
+- [步骤1: 安装usbipd-win](#步骤1-安装usbipd-win)
+- [步骤2: 重新编译WSL2内核](#步骤2-重新编译WSL2内核)
+- [步骤3: 验证和使用](#步骤3-验证和使用)
+- [常见问题解答(FAQ)](#常见问题解答(FAQ))
+- [总结](#总结)
+
+
+## 问题背景
 最近在WSL2上搭建我的开发环境，不过在我尝试将bin文件烧录到SD卡（这里我是通过USB读卡器连接到电脑上）上时，发现SD没有被挂载上，去网上找了下原因。发现主要是以下2个原因导致的：
 
-* **WSL2本质是一个虚拟机，无法直接访问宿主主机的USB设备。**
-* **WSL2的内核没有加入USB存储设备的驱动。**
+- **WSL2本质是一个虚拟机，无法直接访问宿主主机的USB设备。**
+- **WSL2的内核没有加入USB存储设备的驱动。**
 
-> WSL2：WSL2本质上是一个虚拟化技术，它在Windows操作系统上创建了一个轻量级的虚拟机，其中运行了一个完整的Linux内核。这个Linux内核与Windows内核相互隔离，但可以通过WSL2与Windows系统进行通信和交互。WSL2使用了Linux内核虚拟机（VM）技术，通过Hyper-V虚拟化平台来实现，在Windows系统上运行Linux应用程序时提供了更好的性能和兼容性。虽然WSL2在本质上是一个虚拟化技术，但它与传统的虚拟机不同，它并不是运行完整的Linux发行版，它更加轻量级且无需额外的资源分配，提供了一个与Linux兼容的运行时环境。用户可以在WSL2中安装并运行各种Linux发行版，如Ubuntu、Debian、Fedora等。WSL2和Linux发行版之间的关系是，WSL2提供了一个运行Linux发行版的虚拟化环境，用户可以在WSL2中安装和运行各种Linux发行版，以获得Linux环境和运行Linux应用程序的能力。
+> `WSL2`：WSL2本质上是一个虚拟化技术，它在Windows操作系统上创建了一个轻量级的虚拟机，其中运行了一个完整的Linux内核。这个Linux内核与Windows内核相互隔离，但可以通过WSL2与Windows系统进行通信和交互。WSL2使用了Linux内核虚拟机（VM）技术，通过Hyper-V虚拟化平台来实现，在Windows系统上运行Linux应用程序时提供了更好的性能和兼容性。虽然WSL2在本质上是一个虚拟化技术，但它与传统的虚拟机不同，它并不是运行完整的Linux发行版，它更加轻量级且无需额外的资源分配，提供了一个与Linux兼容的运行时环境。用户可以在WSL2中安装并运行各种Linux发行版，如Ubuntu、Debian、Fedora等。WSL2和Linux发行版之间的关系是，WSL2提供了一个运行Linux发行版的虚拟化环境，用户可以在WSL2中安装和运行各种Linux发行版，以获得Linux环境和运行Linux应用程序的能力。
 >
 
-------
+## 解决方案
 
-**知道了原因就好办了，先来解决第一个问题：让WSL2连接USB设备。这里用到了usbipd-win这个项目。**
+为了解决这些问题,我们需要:
+1. 使用usbipd-win工具让WSL2连接USB设备
+2. 重新编译WSL2内核,加入USB存储设备支持
 
-> usbipd-win：USB/IP项目旨在开发一种通用的通过IP网络共享USB设备的系统。为了让计算机之间能够共享USB设备并完全发挥它们的功能，USB/IP将“USB I/O消息”封装到TCP/IP数据包中，并在计算机之间传输它们。说白了就是把USB封装在TCP中，通过网络传送。
+
+## 步骤1: 安装usbipd-win
+
+> `usbipd-win`：USB/IP项目旨在开发一种通用的通过IP网络共享USB设备的系统。为了让计算机之间能够共享USB设备并完全发挥它们的功能，USB/IP将“USB I/O消息”封装到TCP/IP数据包中，并在计算机之间传输它们。说白了就是把USB封装在TCP中，通过网络传送。
 >
+### 在Windows上安装usbipd-win
+1. 打开PowerShell,运行以下命令:
 
-先在windows中打开powershell使用以下命令来安装usbipd工具：
-
-```
+```powershell
 winget install --interactive --exact dorssel.usbipd-win
 ```
 
-下载完后点击安装就好，安装完后还会要求你重启电脑。
+2. 按照安装向导完成安装,可能需要重启电脑。
 
 ![15C1C188-1974-483b-8192-3CE70740A5C5](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/15C1C188-1974-483b-8192-3CE70740A5C5.png)
 
 ![A840BABB-F957-47d6-8663-E80DFE4C8B55](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/A840BABB-F957-47d6-8663-E80DFE4C8B55.png)
 
-再到WSL2中使用使用以下命令来安装usbipd工具：
+### 在WSL2中安装usbipd工具
+1. 在WSL2终端中运行:
 
-```
+```bash
 sudo apt install linux-tools-generic hwdata
-```
-
-```
 sudo update-alternatives --install /usr/local/bin/usbip usbip /usr/lib/linux-tools/*-generic/usbip 20
 ```
 
 ![D18EBF35-3667-41fd-85AD-A0896A14C6EC](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/D18EBF35-3667-41fd-85AD-A0896A14C6EC.png)
 
-到这里第一个问题就解决了，别忘了重启下电脑。
+到这里已经解决掉第一个问题了,完成后,先重启电脑以确保更改生效。
 
-**然后再来解决第二个问题：重新编译WSL2的内核，加入 USB 存储设备支持。**
+## 步骤2: 重新编译WSL2内核
 
-首先我们需要到[WSL2的内核仓库](https://github.com/microsoft/WSL2-Linux-Kernel)中clone一份内核源码：
+### 准备工作
 
-```
+1. 到[WSL2的内核仓库](https://github.com/microsoft/WSL2-Linux-Kernel)克隆WSL2内核源码:
+
+```bash
 git clone https://github.com/microsoft/WSL2-Linux-Kernel.git
 ```
 
-再把源码解压出来：
-
-```
+2. 再把源码解压出来：
+```bash
 unzip WSL2-Linux-Kernel-linux-msft-wsl-5.15.y
 ```
 
 ![image-20231013180736390](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/image-20231013180736390.png)
 
-然后再安装libncurses-dev：
-
+3. 安装必要的工具:
+```bash
+sud apt install libncurses-dev build-essential flex bison libssl-dev libelf-dev dwarves
 ```
-sudo apt install libncurses-dev
-```
 
-> libncurses-dev：libncurses-dev是一个开发库，用于在Linux系统上开发基于终端的用户界面（TUI）应用程序。它是ncurses库的开发版本，提供了编译和链接TUI应用程序所需的头文件和静态库文件。使用libncurses-dev，开发人员可以利用ncurses库的功能创建具有交互性和可视化效果的终端应用程序。
->
+> `libncurses-dev`：libncurses-dev是一个开发库，用于在Linux系统上开发基于终端的用户界面（TUI）应用程序。它是ncurses库的开发版本，提供了编译和链接TUI应用程序所需的头文件和静态库文件。使用libncurses-dev，开发人员可以利用ncurses库的功能创建具有交互性和可视化效果的终端应用程序。
+`build-essential`、`flex`、`bison`、`libssl-dev`、`libelf-dev`、`dwarves`：这些工具是编译内核所需的常见工具和库。
 
-使用以下命令来编辑内核配置文件：
+### 编辑内核配置
 
-```
+1. 运行以下命令:
+
+```bash
 make menuconfig KCONFIG_CONFIG=Microsoft/config-wsl
 ```
 
-进入 `Device Drivers` -> `USB support` -> `Support for Host-side USB` ，选中 `USB Mass Storage support`（ `*` 号是直接编译进内核，`M` 是编译为内核模块，内核模块需要手动加载），把下面弹出来的一堆驱动都选上，保存完之后就可以退出了。
+2. 在配置界面中:
+进入 `Device Drivers` -> `USB support` -> `Support for Host-side USB` ，选中 `USB Mass Storage support`（ `*` 号是直接编译进内核，`M` 是编译为内核模块，内核模块需要手动加载），把下面弹出来的一堆USB相关的驱动都选上，保存完之后就可以退出了。
 
 ![5B2688B6-6ED1-4527-959D-4954D9179CF3](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/5B2688B6-6ED1-4527-959D-4954D9179CF3.png)
 
-在开始编译之前还需要安装`build-essential`、`flex`、`bison`、`libssl-dev`、`libelf-dev`、`dwarves`，这些工具是编译内核所需的常见工具和库。
+### 编译内核
+
+1. 进入源码目录并开始编译:
 
 ```bash
-sudo apt install build-essential flex bison libssl-dev libelf-dev dwarves
-```
-
-![AC3394FD-F04C-4fc5-8E1A-7805B9E03462](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/AC3394FD-F04C-4fc5-8E1A-7805B9E03462.png)
-
-这里我已经安装过了就不重新安装了，接下来就可以编译内核了，进入源码目录WSL2-Linux-Kernel-linux-msft-wsl-5.15.y，用下面这个命令将刚才的那些驱动全部编进内核中：
-
-```
 cd WSL2-Linux-Kernel-linux-msft-wsl-5.15.y
-```
-
-```
 make -j$(nproc) bzImage KCONFIG_CONFIG=Microsoft/config-wsl
 ```
-编译完成的内核是bzImage文件，和我们编译时指定的名称一致，文件在arch/x86/boot/文件夹下。
+> 注意: 编译过程可能需要30分钟到1小时,取决于你的硬件配置。
+
+2. 编译完成后,在 `arch/x86/boot/` 目录下找到 `bzImage` 文件。
 
 ![image-20231013182814747](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/image-20231013182814747.png)
 
 > 大家不嫌弃的话可以使用我编译好的这个：
->
 > 链接：https://pan.baidu.com/s/1dfBIGh_a2nbN9QiXUPQtXg?pwd=WSL2 
 > 提取码：WSL2
 
-把编译好的内核复制出来，放在 Windows 的用户目录（默认是 `C:\Users\{username}`）下创建一个名为 `.wslconfig` 的文件，内容根据 [微软官方文档](https://docs.microsoft.com/zh-cn/windows/wsl/wsl-config#options-for-wslconfig) 来：
+### 配置新内核
+
+1. 将编译好的内核复制到Windows用户目录(`C:\Users\{username}`)。
+2. 在用户目录下创建 `.wslconfig` 文件,根据 [微软官方文档](https://docs.microsoft.com/zh-cn/windows/wsl/wsl-config#options-for-wslconfig)内容如下:
 
 ```
 [wsl2]
@@ -123,43 +135,42 @@ kernel=path\\to\\kernel
 
 到这里第二个问题也解决完了。
 
-**最后就是验证成果了**
+## 步骤3: 验证和使用
 
-打开powershell使用以下命令来查看内核版本号。
+1. 检查内核版本:
+打开powershell运行以下命令来查看内核版本号。
 
-```
+```bash
 uname -r
 ```
 
 ![0944BD45-E23A-4b9f-BAC8-A96E95CF021C](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/0944BD45-E23A-4b9f-BAC8-A96E95CF021C.png)
 
-可以看到这是更换内核前的版本号是5.15.90.1，然后使用下面这个命令来关闭WSL2，再重新打开WSL2。
+可以看到这是更换内核前的版本号是5.15.90.1，然后运行以下命令来关闭WSL2，再重新打开WSL2并运行上面查看内核版本号的命令。
 
-```
+```powershell
 wsl --shutdown
 ```
 
 ![97AAF45F-B70A-4aa9-A0F0-38D9A7495B68](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/97AAF45F-B70A-4aa9-A0F0-38D9A7495B68.png)
 
-可以看到版本已经变成5.15.133.1了，说明内核更换成功，接下来使用usbipd-win来连接，usbipd-win的使用方法参考也是参考的[微软官方文档](https://learn.microsoft.com/zh-cn/windows/wsl/connect-usb)，首先打开powershell，使用下面的第一个命令列出所有连接到 Windows 的 USB 设备，找到USB大容量存储设备对应的BUSID，然后使用这个BUSID替换下面第二个命令中的<busid>来使USB设备连接到WSL2，以我的为例：
+可以看到版本已经变成5.15.133.1了，说明内核更换成功。
 
-```
+2. 使用usbipd-win连接USB设备:
+usbipd-win的使用方法参考[微软官方文档](https://learn.microsoft.com/zh-cn/windows/wsl/connect-usb)，首先打开powershell，使用下面的第一个命令列出所有连接到 Windows 的 USB 设备，找到USB大容量存储设备对应的BUSID，然后使用这个BUSID替换下面第二个命令中的<busid>并运行该命令来使USB设备连接到WSL2，以我的为例：
+
+```powershell
 usbipd wsl list
-```
-
-```
 usbipd wsl attach --busid <busid>
 ```
 
 ![6C1F5365-AAF2-4740-A840-3B6E7DC1A73E](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/6C1F5365-AAF2-4740-A840-3B6E7DC1A73E.png)
 
-最后到WSL2中使用下面使用下面这2个命令来查看USB设备和SD卡的挂载情况：
+3. 在WSL2中验证:
+到WSL2中运行以下2个命令来查看USB设备和SD卡的挂载情况：
 
-```
+```bash
 lsusb
-```
-
-```
 ls /dev/sd*
 ```
 
@@ -167,12 +178,24 @@ ls /dev/sd*
 
 可以看到WSL2已经成功地连接上了USB设备，SD卡也挂载成功✌️。
 
-PS：有哪个地方写得不对的，欢迎各位指正。
+## 常见问题解答(FAQ)
+
+Q: 编译内核失败怎么办?
+A: 确保已安装所有必要的依赖,并检查错误信息。可能需要更新系统或安装额外的开发工具。
+
+Q: USB设备连接后在WSL2中不可见?
+A: 确保usbipd-win正确安装并运行,检查Windows防火墙设置是否阻止了连接。
+
+Q: 新内核无法加载?
+A: 检查 `.wslconfig` 文件路径是否正确,确保使用双反斜杠 `\\`。
+
+## 总结
+
+通过以上步骤,我们成功解决了WSL2连接USB存储设备的问题。这个过程涉及到了安装usbipd-win工具和重新编译WSL2内核,虽然步骤较多,但能够显著提升WSL2的功能性。
 
 ------
 
-**参考连接**
-
+参考连接:
 [在WSL2中连接USB设备](https://www.littleqiu.net/access-usb-storage-in-wsl2/)
 
 [HyperV和WSL2的USB直通](https://yadom.in/archives/usb-passthrough-hyper-v-and-wsl2.html)
