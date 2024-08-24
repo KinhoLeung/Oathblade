@@ -7,16 +7,6 @@ tags: [开发环境, WSL2, USB]
 category: '软件开发'
 draft: false
 ---
-## 目录
-
-- [问题背景](#问题背景)
-- [解决方案](#解决方案)
-- [步骤1: 安装usbipd-win](#步骤1-安装usbipd-win)
-- [步骤2: 重新编译WSL2内核](#步骤2-重新编译WSL2内核)
-- [步骤3: 验证和使用](#步骤3-验证和使用)
-- [常见问题解答(FAQ)](#常见问题解答(FAQ))
-- [总结](#总结)
-
 ## 问题背景
 
 最近在WSL2上搭建我的开发环境，不过在我尝试将bin文件烧录到SD卡（这里我是通过USB读卡器连接到电脑上）上时，发现SD没有被挂载上，去网上找了下原因。发现主要是以下2个原因导致的：
@@ -59,7 +49,7 @@ sudo update-alternatives --install /usr/local/bin/usbip usbip /usr/lib/linux-too
 ```
 
 ![D18EBF35-3667-41fd-85AD-A0896A14C6EC](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/D18EBF35-3667-41fd-85AD-A0896A14C6EC.png)
-到这里已经解决掉第一个问题了,完成后,先重启电脑以确保更改生效。
+到这里已经解决掉第一个问题了,完成后先重启电脑以确保更改生效。
 
 ## 步骤2: 重新编译WSL2内核
 
@@ -78,7 +68,6 @@ unzip WSL2-Linux-Kernel-linux-msft-wsl-5.15.y
 ```
 
 ![image-20231013180736390](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/image-20231013180736390.png)
-
 3. 安装必要的工具:
 
 ```bash
@@ -150,9 +139,8 @@ wsl --shutdown
 
 ![97AAF45F-B70A-4aa9-A0F0-38D9A7495B68](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/97AAF45F-B70A-4aa9-A0F0-38D9A7495B68.png)
 可以看到版本已经变成5.15.133.1了，说明内核更换成功。
-
 2. 使用usbipd-win连接USB设备:
-   usbipd-win的使用方法参考[微软官方文档](https://learn.microsoft.com/zh-cn/windows/wsl/connect-usb)，首先打开powershell，使用下面的第一个命令列出所有连接到 Windows 的 USB 设备，找到USB大容量存储设备对应的BUSID，然后使用这个BUSID替换下面第二个命令中的`<busid>`并运行该命令来使USB设备连接到WSL2，以我的为例：
+   usbipd-win的使用方法参考[微软官方文档](https://learn.microsoft.com/zh-cn/windows/wsl/connect-usb)，首先打开powershell，使用下面的第一个命令列出所有连接到 Windows 的 USB 设备，找到USB大容量存储设备对应的BUSID，然后使用这个BUSID替换下面第二个命令中的 `<busid>`并运行该命令来使USB设备连接到WSL2，以我的为例：
 
 ```powershell
 usbipd wsl list
@@ -160,7 +148,6 @@ usbipd wsl attach --busid <busid>
 ```
 
 ![6C1F5365-AAF2-4740-A840-3B6E7DC1A73E](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/6C1F5365-AAF2-4740-A840-3B6E7DC1A73E.png)
-
 3. 在WSL2中验证:
    到WSL2中运行以下2个命令来查看USB设备和SD卡的挂载情况：
 
