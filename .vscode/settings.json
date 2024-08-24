@@ -18,5 +18,6 @@
     "quickfix.biome": "always",
     "source.organizeImports.biome": "always"
   },
-  "frontMatter.dashboard.openOnStart": false
+  "frontMatter.dashboard.openOnStart": false,
+  "commentTranslate.source": "intellsmi.comment-translate-ali.cloud"
 }
