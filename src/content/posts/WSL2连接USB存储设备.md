@@ -104,8 +104,7 @@ make -j$(nproc) bzImage KCONFIG_CONFIG=Microsoft/config-wsl
    ![image-20231013182814747](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/image-20231013182814747.png)
 
 > 大家不嫌弃的话可以使用我编译好的这个：
-> 链接：https://pan.baidu.com/s/1dfBIGh_a2nbN9QiXUPQtXg?pwd=WSL2
-> 提取码：WSL2
+> [WSL2内核](https://alist.oathblade.com/CFR2/WSL2%E5%86%85%E6%A0%B8)
 
 ### 配置新内核
 
