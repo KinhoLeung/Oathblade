@@ -2,7 +2,7 @@
 
 ### Fuwari源码：
 ::github{repo="saicaca/fuwari"}
-### Oathblade源码：
+### Oathblade源码（master）：
 ::github{repo="KinhoLeung/Oathblade"}
 
 > ### 本站使用的图片来源
