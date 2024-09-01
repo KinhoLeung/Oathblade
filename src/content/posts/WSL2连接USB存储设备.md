@@ -36,8 +36,8 @@ winget install --interactive --exact dorssel.usbipd-win
 ```
 
 2. 按照安装向导完成安装,可能需要重启电脑。
-   ![15C1C188-1974-483b-8192-3CE70740A5C5](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/15C1C188-1974-483b-8192-3CE70740A5C5.png)
-   ![A840BABB-F957-47d6-8663-E80DFE4C8B55](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/A840BABB-F957-47d6-8663-E80DFE4C8B55.png)
+   ![15C1C188-1974-483b-8192-3CE70740A5C5](https://images.oathblade.com/images/2024/09/01/1f7cb115987679f375e9f862e1484bb0.webp)
+   ![A840BABB-F957-47d6-8663-E80DFE4C8B55](https://images.oathblade.com/images/2024/09/01/4ede648700ffd07ef3d8f55ea17ecf4b.webp)
 
 ### 在WSL2中安装usbipd工具
 
@@ -48,7 +48,7 @@ sudo apt install linux-tools-generic hwdata
 sudo update-alternatives --install /usr/local/bin/usbip usbip /usr/lib/linux-tools/*-generic/usbip 20
 ```
 
-![D18EBF35-3667-41fd-85AD-A0896A14C6EC](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/D18EBF35-3667-41fd-85AD-A0896A14C6EC.png)
+![D18EBF35-3667-41fd-85AD-A0896A14C6EC](https://images.oathblade.com/images/2024/09/01/57c07cc025918ce5c7d6b6256a72f340.webp)
 到这里已经解决掉第一个问题了,完成后先重启电脑以确保更改生效。
 
 ## 步骤2: 重新编译WSL2内核
@@ -67,7 +67,7 @@ git clone https://github.com/microsoft/WSL2-Linux-Kernel.git
 unzip WSL2-Linux-Kernel-linux-msft-wsl-5.15.y
 ```
 
-![image-20231013180736390](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/image-20231013180736390.png)
+![image-20231013180736390](https://images.oathblade.com/images/2024/09/01/2f7deb4e2fd43d37040f8b7e469e4826.webp)
 3. 安装必要的工具:
 
 ```bash
@@ -87,7 +87,7 @@ make menuconfig KCONFIG_CONFIG=Microsoft/config-wsl
 
 2. 在配置界面中:
    进入 `Device Drivers` -> `USB support` -> `Support for Host-side USB` ，选中 `USB Mass Storage support`（ `*` 号是直接编译进内核，`M` 是编译为内核模块，内核模块需要手动加载），把下面弹出来的一堆USB相关的驱动都选上，保存完之后就可以退出了。
-   ![5B2688B6-6ED1-4527-959D-4954D9179CF3](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/5B2688B6-6ED1-4527-959D-4954D9179CF3.png)
+   ![5B2688B6-6ED1-4527-959D-4954D9179CF3](https://images.oathblade.com/images/2024/09/01/0bc061c6475bc5c452c1e748f506498d.webp)
 
 ### 编译内核
 
@@ -101,7 +101,7 @@ make -j$(nproc) bzImage KCONFIG_CONFIG=Microsoft/config-wsl
 > 注意: 编译过程可能需要30分钟到1小时,取决于你的硬件配置。
 
 2. 编译完成后,在 `arch/x86/boot/` 目录下找到 `bzImage` 文件。
-   ![image-20231013182814747](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/image-20231013182814747.png)
+   ![image-20231013182814747](https://images.oathblade.com/images/2024/09/01/c0ed2d5b03fac39eaf42ab751b335bb0.webp)
 
 > 大家不嫌弃的话可以使用我编译好的这个：
 > [WSL2内核](https://alist.oathblade.com/CFR2/WSL2%E5%86%85%E6%A0%B8)
@@ -117,7 +117,7 @@ kernel=path\\to\\kernel
 ```
 
 以我的为例：
-![9070468D-3F61-4cb3-BD14-B947B9317D5B](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/9070468D-3F61-4cb3-BD14-B947B9317D5B.png)
+![9070468D-3F61-4cb3-BD14-B947B9317D5B](https://images.oathblade.com/images/2024/09/01/b7be3960a1be65e038082f70f313a97b.webp)
 到这里第二个问题也解决完了。
 
 ## 步骤3: 验证和使用
@@ -129,15 +129,16 @@ kernel=path\\to\\kernel
 uname -r
 ```
 
-![0944BD45-E23A-4b9f-BAC8-A96E95CF021C](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/0944BD45-E23A-4b9f-BAC8-A96E95CF021C.png)
+![0944BD45-E23A-4b9f-BAC8-A96E95CF021C](https://images.oathblade.com/images/2024/09/01/c94d13319237d05ec10c69c684eaca6e.webp)
 可以看到这是更换内核前的版本号是5.15.90.1，然后运行以下命令来关闭WSL2，再重新打开WSL2并运行上面查看内核版本号的命令。
 
 ```powershell
 wsl --shutdown
 ```
 
-![97AAF45F-B70A-4aa9-A0F0-38D9A7495B68](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/97AAF45F-B70A-4aa9-A0F0-38D9A7495B68.png)
+![97AAF45F-B70A-4aa9-A0F0-38D9A7495B68](https://images.oathblade.com/images/2024/09/01/df78ab6851d11abb27155682462e20fb.webp)
 可以看到版本已经变成5.15.133.1了，说明内核更换成功。
+
 2. 使用usbipd-win连接USB设备:
    usbipd-win的使用方法参考[微软官方文档](https://learn.microsoft.com/zh-cn/windows/wsl/connect-usb)，首先打开powershell，使用下面的第一个命令列出所有连接到 Windows 的 USB 设备，找到USB大容量存储设备对应的BUSID，然后使用这个BUSID替换下面第二个命令中的 `<busid>`并运行该命令来使USB设备连接到WSL2，以我的为例：
 
@@ -146,7 +147,7 @@ usbipd wsl list
 usbipd wsl attach --busid <busid>
 ```
 
-![6C1F5365-AAF2-4740-A840-3B6E7DC1A73E](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/6C1F5365-AAF2-4740-A840-3B6E7DC1A73E.png)
+![6C1F5365-AAF2-4740-A840-3B6E7DC1A73E](https://images.oathblade.com/images/2024/09/01/b27f9b936056cb878f608fef5b911b3f.webp)
 3. 在WSL2中验证:
    到WSL2中运行以下2个命令来查看USB设备和SD卡的挂载情况：
 
@@ -155,7 +156,7 @@ lsusb
 ls /dev/sd*
 ```
 
-![9AB1E88D-E644-4d4f-9187-9376A13B3462](https://kinho-image.oss-cn-shenzhen.aliyuncs.com/image/9AB1E88D-E644-4d4f-9187-9376A13B3462.png)
+![9AB1E88D-E644-4d4f-9187-9376A13B3462](https://images.oathblade.com/images/2024/09/01/b6dd8af1be5eacdbd53eca21c7a84e71.webp)
 可以看到WSL2已经成功地连接上了USB设备，SD卡也挂载成功✌️。
 
 ## 常见问题解答(FAQ)
