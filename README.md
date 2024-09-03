@@ -1,5 +1,5 @@
 # Oathblade
 
-My personal site built powered by Astro & Fuwari.
+My blog site powered by [Astro](https://astro.build) & [Fuwari](https://fuwari.vercel.app).
 
-Currently deployed in Vercel, accessed at [oathblade.com](https://oathblade.com).
+Currently deployed in [Vercel](https://vercel.com), accessed at [oathblade.com](https://oathblade.com).
