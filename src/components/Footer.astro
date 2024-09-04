@@ -4,19 +4,28 @@ import { url } from '../utils/url-utils'
 import { Icon } from "astro-icon/components";
 ---
 
-<div class="card-base max-w-[var(--page-width)] min-h-[4.5rem] rounded-b-none mx-auto flex items-center px-6">
-    <div class="transition text-50 text-sm">
-        © 2024 {profileConfig.name}. All Rights Reserved. 
-        <br>
-        <a class="link text-[var(--primary)] font-medium inline-flex items-center" target="_blank" href={url('rss.xml')}>
-            <Icon name="mdi:rss" class="w-4 h-4 mr-1"/>RSS
-        </a> 
-        <a class="link text-[var(--primary)] font-medium inline-flex items-center" target="_blank" href={url('sitemap-index.xml')}>
-            <Icon name="mdi:map-outline" class="w-4 h-4 mr-1"/>Sitemap
-        </a>
-        <br>
-        Powered by
-        <a class="link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
-        <a class="link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
+<div class="card-base max-w-[var(--page-width)] min-h-[4.5rem] rounded-b-none mx-auto px-6">
+    <div class="text-50 text-sm">
+        <div>
+            © 2024 {profileConfig.name}. All Rights Reserved.
+        </div>
+        <div class="flex gap-2 mt-0.5">
+            <a class="link text-[var(--primary)] font-medium inline-flex items-center" target="_blank" href={url('rss.xml')}>
+                <Icon name="material-symbols:rss-feed" />RSS
+            </a>
+            <span class="mx-1">|</span>
+            <a class="link text-[var(--primary)] font-medium inline-flex items-center" target="_blank" href={url('sitemap-index.xml')}>
+                <Icon name="material-symbols:map-outline" />Site Map
+            </a>
+            <span class="mx-1">|</span>
+            <a class="link text-[var(--primary)] font-medium inline-flex items-center" target="_blank" href="https://github.com/KinhoLeung/Oathblade/">
+                <Icon name="fa6-brands:github" />Source Code
+            </a>
+        </div>
+        <div class="mt-0.5">
+            Powered by
+            <a class="link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
+            <a class="link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
+        </div>
     </div>
 </div>
