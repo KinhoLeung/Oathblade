@@ -40,4 +40,22 @@ const postUrl = decodeURIComponent(Astro.url.toString())
         </div>
     </div>
     <Icon name="fa6-brands:creative-commons" class="transition text-[15rem] absolute pointer-events-none right-6 top-1/2 -translate-y-1/2 text-black/5 dark:text-white/5"></Icon>
+
+    <img id="signature" src="/favicon/signature-ElysiaValoren-light.svg" alt="Signature" class="absolute right-0 top-1/2 -translate-y-1/2 w-80 h-auto" />
 </div>
+
+<script>
+function updateFooterLogo() {
+    const footerLogo = document.getElementById('signature');
+    if (document.documentElement.classList.contains('dark')) {
+        footerLogo.src = '/favicon/signature-ElysiaValoren-dark.svg';
+    } else {
+        footerLogo.src = '/favicon/signature-ElysiaValoren-light.svg';
+    }
+}
+// 初始化时更新图片
+updateFooterLogo();
+// 监听主题变化
+document.addEventListener('theme:change',updateFooterLogo);
+</script>
+

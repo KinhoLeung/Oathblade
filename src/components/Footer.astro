@@ -4,22 +4,22 @@ import { url } from '../utils/url-utils'
 import { Icon } from "astro-icon/components";
 ---
 
-<div class="card-base max-w-[var(--page-width)] min-h-[4.5rem] rounded-b mx-auto px-3 pt-3 pb-3">
+<div class="card-base max-w-[var(--page-width)] min-h-[4.5rem] rounded-b mx-auto px-4 pt-4 pb-4">
     <div class="text-50 text-sm">
         <div>
             © 2024 {profileConfig.name}. All Rights Reserved.
         </div>
         <div class="flex gap-2 mt-0.5">
             <a class="link text-[var(--primary)] font-medium inline-flex items-center" target="_blank" href={url('rss.xml')}>
-                <Icon name="material-symbols:rss-feed"  class="mr-1" />RSS
+                <Icon name="material-symbols:rss-feed" class="mr-0.5" />RSS
             </a>
             <span class="mx-1">|</span>
             <a class="link text-[var(--primary)] font-medium inline-flex items-center" target="_blank" href={url('sitemap-index.xml')}>
-                <Icon name="material-symbols:map-outline"  class="mr-1" />Site Map
+                <Icon name="material-symbols:map-outline" class="mr-0.5" />Site Map
             </a>
             <span class="mx-1">|</span>
             <a class="link text-[var(--primary)] font-medium inline-flex items-center" target="_blank" href="https://github.com/KinhoLeung/Oathblade/">
-                <Icon name="fa6-brands:github"  class="mr-1" />Source Code
+                <Icon name="fa6-brands:github" class="mr-0.5" />Source Code
             </a>
         </div>
         <div class="mt-0.5">
@@ -28,6 +28,20 @@ import { Icon } from "astro-icon/components";
             <a class="link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>.
         </div>
     </div>
-    <!--<img src="/favicon/Oathblade-192.png" alt="Site Logo" class="absolute right-3 top-1/2 transform -translate-y-1/2 w-12 h-12" />-->
-    <!--<SearchPanel client:load>-->
+    <img id="footer-logo" src="/favicon/Oathblade-light.svg" alt="Site Logo" class="absolute right-4 top-1/2 transform -translate-y-1/2 w-16 h-16" />
 </div>
+
+<script>
+function updateFooterLogo() {
+    const footerLogo = document.getElementById('footer-logo');
+    if (document.documentElement.classList.contains('dark')) {
+        footerLogo.src = '/favicon/Oathblade-dark.svg';
+    } else {
+        footerLogo.src = '/favicon/Oathblade-light.svg';
+    }
+}
+// 初始化时更新图片
+updateFooterLogo();
+// 监听主题变化
+document.addEventListener('theme:change',updateFooterLogo);
+</script>

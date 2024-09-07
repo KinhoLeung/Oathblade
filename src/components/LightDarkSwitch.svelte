@@ -34,6 +34,7 @@ onMount(() => {
 function switchScheme(newMode: LIGHT_DARK_MODE) {
   mode = newMode
   setTheme(newMode)
+  document.dispatchEvent(new Event('theme:change'));
 }
 
 function toggleScheme() {
