@@ -43,7 +43,7 @@ export const navBarConfig: NavBarConfig = {
 }
 
 export const profileConfig: ProfileConfig = {
-  avatar: 'assets/images/ElysiaValoren.webp',  // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+  avatar: 'assets/images/ElysiaValoren.png',  // Relative to the /src directory. Relative to the /public directory if it starts with '/'
   name: 'Elysia Valoren',
   bio: 'An oath is like a blade—only by guarding it with your heart can it remain unbroken.',
   links: [
