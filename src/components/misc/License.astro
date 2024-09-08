@@ -22,14 +22,12 @@ const postUrl = decodeURIComponent(Astro.url.toString())
     <div class="transition font-bold text-black/75 dark:text-white/75">
         {title}
     </div>
-    <a href={postUrl} class="link text-[var(--primary)]">
-        {postUrl}
-    </a>
+    <!-- <a href={postUrl} class="link text-[var(--primary)]"> {postUrl} </a> -->
     <div class="flex gap-6 mt-2">
-        <div>
+        <!--<div>
             <div class="transition text-black/30 dark:text-white/30 text-sm">{i18n(I18nKey.author)}</div>
             <div class="transition text-black/75 dark:text-white/75 whitespace-nowrap">{profileConf.name}</div>
-        </div>
+        </div>-->
         <div>
             <div class="transition text-black/30 dark:text-white/30 text-sm">{i18n(I18nKey.publishedAt)}</div>
             <div class="transition text-black/75 dark:text-white/75 whitespace-nowrap">{formatDateToYYYYMMDD(pubDate)}</div>
@@ -39,9 +37,8 @@ const postUrl = decodeURIComponent(Astro.url.toString())
             <a href={licenseConf.url} target="_blank" class="link text-[var(--primary)] whitespace-nowrap">{licenseConf.name}</a>
         </div>
     </div>
+    <img id="signature" src="/favicon/signature-ElysiaValoren-light.svg" alt="Signature" class="absolute right-0 top-1/2 -translate-y-1/2 w-72 h-auto" />
     <Icon name="fa6-brands:creative-commons" class="transition text-[15rem] absolute pointer-events-none right-6 top-1/2 -translate-y-1/2 text-black/5 dark:text-white/5"></Icon>
-
-    <img id="signature" src="/favicon/signature-ElysiaValoren-light.svg" alt="Signature" class="absolute right-0 top-1/2 -translate-y-1/2 w-80 h-auto" />
 </div>
 
 <script>
