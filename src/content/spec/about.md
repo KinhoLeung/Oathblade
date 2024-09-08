@@ -11,4 +11,4 @@
 > ### 本站使用的图片来源
 >
 > - [剣よ、私に力を与えてください](https://www.pixiv.net/artworks/107557137) by [Yue](https://www.pixiv.net/users/93308475)
-> - [diamond-hilt](https://game-icons.net/1x1/delapouite/diamond-hilt.html) by [GameIcons](https://github.com/game-icons/icons)
+> - [Sword altar](https://game-icons.net/1x1/delapouite/sword-altar.html) by [GameIcons](https://github.com/game-icons/icons)
