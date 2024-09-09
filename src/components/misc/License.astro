@@ -37,9 +37,23 @@ const postUrl = decodeURIComponent(Astro.url.toString())
             <a href={licenseConf.url} target="_blank" class="link text-[var(--primary)] whitespace-nowrap">{licenseConf.name}</a>
         </div>
     </div>
-    <img id="signature" src="/favicon/signature-ElysiaValoren-light.svg" alt="Signature" class="absolute right-0 top-1/2 -translate-y-1/2 w-72 h-auto" />
+    <img id="signature" src="/favicon/signature-ElysiaValoren-light.svg" alt="Signature" class="absolute right-0 top-1/2 -translate-y-1/2 signature-large" />
     <Icon name="fa6-brands:creative-commons" class="transition text-[15rem] absolute pointer-events-none right-6 top-1/2 -translate-y-1/2 text-black/5 dark:text-white/5"></Icon>
 </div>
+
+<style>
+    /* 大尺寸签名（电脑端） */
+    .signature-large {
+        width: 20rem; /* 大尺寸 */
+    }
+
+    /* 小尺寸签名（手机端） */
+    @media (max-width: 768px) {
+        .signature-large {
+            width: 8rem; /* 小尺寸 */
+        }
+    }
+</style>
 
 <script>
 function updateFooterLogo() {
