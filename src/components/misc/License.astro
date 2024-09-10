@@ -43,15 +43,9 @@ const postUrl = decodeURIComponent(Astro.url.toString())
 
 <style>
 #signature {
-    max-width: 50%;
+    max-width: 40%;
     height: auto;
     display: block;
-}
-
-@media (min-width: 1024px) {
-    #signature {
-        max-width: 40%;
-    }
 }
 
 @media (max-width: 768px) {
@@ -59,13 +53,6 @@ const postUrl = decodeURIComponent(Astro.url.toString())
         max-width: 36%;
     }
 }
-
-@media (max-width: 480px) {
-    #signature {
-        max-width: 30%;
-    }
-}
-
 </style>
 
 <script>
