@@ -43,15 +43,14 @@ const postUrl = decodeURIComponent(Astro.url.toString())
 
 <style>
 #signature {
-    /* 默认情况下签名图片的样式 */
-    width: 320px; /* 默认宽度 */
+    max-width: 40%;
     height: auto;
+    display: block;
 }
 
-/* 当屏幕宽度小于等于768px时（通常认为这是移动设备的阈值） */
 @media (max-width: 768px) {
     #signature {
-        width: 128px; /* 移动端宽度 */
+        max-width: 36%;
     }
 }
 </style>
