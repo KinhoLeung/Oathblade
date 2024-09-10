@@ -44,7 +44,6 @@ const postUrl = decodeURIComponent(Astro.url.toString())
 <style>
 #signature {
     max-width: 40%;
-    height: auto;
     display: block;
 }
 
@@ -56,17 +55,17 @@ const postUrl = decodeURIComponent(Astro.url.toString())
 </style>
 
 <script>
-function updateFooterLogo() {
-    const footerLogo = document.getElementById('signature');
+function updateSignature() {
+    const signature = document.getElementById('signature');
     if (document.documentElement.classList.contains('dark')) {
-        footerLogo.src = '/favicon/signature-ElysiaValoren-dark.svg';
+        signature.src = '/favicon/signature-ElysiaValoren-dark.svg';
     } else {
-        footerLogo.src = '/favicon/signature-ElysiaValoren-light.svg';
+        signature.src = '/favicon/signature-ElysiaValoren-light.svg';
     }
 }
 // 初始化时更新图片
-updateFooterLogo();
+updateSignature();
 // 监听主题变化
-document.addEventListener('theme:change',updateFooterLogo);
+document.addEventListener('theme:change',updateSignature);
 </script>
 
