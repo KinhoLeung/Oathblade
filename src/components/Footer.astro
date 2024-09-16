@@ -8,9 +8,9 @@ import { Icon } from "astro-icon/components";
 function updateFooterLogo() {
     const footerLogo = document.getElementById('footer-icon');
     if (document.documentElement.classList.contains('dark')) {
-        footerLogo.src = '/favicon/signature-ElysiaValoren-dark.svg';
+        footerLogo.src = '/favicon/Oathblade-dark.svg';
     } else {
-        footerLogo.src = '/favicon/signature-ElysiaValoren-light.svg';
+        footerLogo.src = '/favicon/Oathblade-light.svg';
     }
 }
 // 初始化时更新图片
@@ -45,18 +45,3 @@ document.addEventListener('theme:change',updateFooterLogo);
     </div>
     <img id="footer-icon" src="/favicon/Oathblade-light.svg" alt="Site Icon" class="absolute right-4 top-1/2 transform -translate-y-1/2 w-16 h-16" />
 </div>
-
-<!-- <script>
-function updateFooterLogo() {
-    const footerLogo = document.getElementById('footer-icon');
-    if (document.documentElement.classList.contains('dark')) {
-        footerLogo.src = '/favicon/Oathblade-dark.svg';
-    } else {
-        footerLogo.src = '/favicon/Oathblade-light.svg';
-    }
-}
-// 初始化时更新图片
-updateFooterLogo();
-// 监听主题变化
-document.addEventListener('theme:change',updateFooterLogo);
-</script> -->
