@@ -19,5 +19,8 @@
     "source.organizeImports.biome": "always"
   },
   "frontMatter.dashboard.openOnStart": false,
-  "commentTranslate.source": "intellsmi.comment-translate-ali.cloud"
+  "commentTranslate.source": "intellsmi.comment-translate-ali.cloud",
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  }
 }

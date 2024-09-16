@@ -4,7 +4,7 @@ published: 2024-08-19
 description: '本文详细介绍了如何在WSL2环境中连接USB存储设备,解决了WSL2无法直接访问宿主机USB设备和内核缺少USB存储设备驱动的问题。通过使用usbipd-win工具和重新编译WSL2内核,实现了USB设备在WSL2中的成功挂载。'
 image: ''
 tags: [开发环境, WSL2, USB]
-category: '软件开发'
+category: '编程'
 draft: false
 ---
 ## 问题背景
@@ -104,7 +104,7 @@ make -j$(nproc) bzImage KCONFIG_CONFIG=Microsoft/config-wsl
    ![image-20231013182814747](https://images.oathblade.com/images/2024/09/01/c0ed2d5b03fac39eaf42ab751b335bb0.webp)
 
 > 大家不嫌弃的话可以使用我编译好的这个：
-> [WSL2内核](https://alist.oathblade.com/115Share)
+> [WSL2内核](https://alist.oathblade.com/WSL2%E5%86%85%E6%A0%B8)
 
 ### 配置新内核
 

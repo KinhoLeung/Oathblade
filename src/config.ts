@@ -9,7 +9,7 @@ import { LinkPreset } from './types/config'
 export const siteConfig: SiteConfig = {
   title: 'Oathblade',
   subtitle: 'Demo Site',
-  lang: 'zh_CN',         // 'en', 'zh_CN', 'zh_TW', 'ja', 'ko'
+  lang: 'en',         // 'en', 'zh_CN', 'zh_TW', 'ja', 'ko'
   themeColor: {
     hue: 250,         // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
     fixed: true,     // Hide the theme color picker for visitors
@@ -17,7 +17,7 @@ export const siteConfig: SiteConfig = {
   banner: {
     enable: false,
     src: 'assets/images/demo-banner.png',   // Relative to the /src directory. Relative to the /public directory if it starts with '/'
-    position: 'center', // Equivalent to object-position, defaults center
+    position: 'center',      // Equivalent to object-position, only supports 'top', 'center', 'bottom'. 'center' by default
     credit: {
       enable: false,         // Display the credit text of the banner image
       text: '',              // Credit text to be displayed

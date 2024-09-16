@@ -13,15 +13,14 @@ export async function GET(context: APIContext) {
   return rss({
     title: siteConfig.title,
     description: siteConfig.subtitle || 'No description',
-    site: context.site ?? 'https://fuwari.vercel.app',
+    site: context.site ?? 'https://www.oathblade.com/',
     items: blog.map(post => {
-      const body = typeof post.data.body === 'string' ? post.data.body : ''
       return {
       title: post.data.title,
       pubDate: post.data.published,
         description: post.data.description || '',
       link: `/posts/${post.slug}/`,
-        content: sanitizeHtml(parser.render(body), {
+        content: sanitizeHtml(parser.render(post.body), {
         allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
       }),
       }
