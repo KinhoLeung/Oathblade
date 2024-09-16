@@ -18,6 +18,36 @@ const profileConf = profileConfig
 const licenseConf = licenseConfig
 const postUrl = decodeURIComponent(Astro.url.toString())
 ---
+
+<style>
+#signature {
+    max-width: 40%;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    #signature {
+        max-width: 36%;
+    }
+}
+</style>
+
+<script>
+function updateSignature() {
+    const signature = document.getElementById('signature');
+    if (document.documentElement.classList.contains('dark')) {
+        signature.src = '/favicon/signature-ElysiaValoren-dark.svg';
+    } else {
+        signature.src = '/favicon/signature-ElysiaValoren-light.svg';
+    }
+}
+// 初始化时更新图片
+updateSignature();
+// 监听主题变化
+document.addEventListener('theme:change',updateSignature);
+</script>
+
 <div class=`relative transition overflow-hidden bg-[var(--license-block-bg)] py-5 px-6 ${className}`>
     <div class="transition font-bold text-black/75 dark:text-white/75">
         {title}
@@ -41,19 +71,7 @@ const postUrl = decodeURIComponent(Astro.url.toString())
     <Icon name="fa6-brands:creative-commons" class="transition text-[15rem] absolute pointer-events-none right-6 top-1/2 -translate-y-1/2 text-black/5 dark:text-white/5"></Icon>
 </div>
 
-<style>
-#signature {
-    max-width: 40%;
-    height: auto;
-    display: block;
-}
 
-@media (max-width: 768px) {
-    #signature {
-        max-width: 36%;
-    }
-}
-</style>
 
 <!-- <script>
 function updateSignature() {
