@@ -62,7 +62,7 @@ export const profileConfig: ProfileConfig = {
     {
       name: 'Steam',
       icon: 'fa6-brands:steam',
-      url: 'https://steamcommunity.com/profiles/76561199564738945',
+      url: 'https://steamcommunity.com/id/kinholeung',
     },
     {
       name: 'Spotify',
