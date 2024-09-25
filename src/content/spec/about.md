@@ -1,3 +1,11 @@
+# 关于我
+
+## 程序员，喜欢探索和折腾，最近在折腾AI。
+
+------
+
+# 关于本站
+
 ## 我的博客网站使用了 [Fuwari](https://fuwari.vercel.app/) 这个博客模板，我在此基础上进行了一些修改并且重新命名为 [Oathblade](https://www.oathblade.com/)。
 
 ### Fuwari源码：
