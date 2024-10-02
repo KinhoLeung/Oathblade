@@ -47,33 +47,33 @@ export const profileConfig: ProfileConfig = {
   name: 'Elysia Valoren',
   bio: 'An oath is like a blade—only by guarding it with your heart can it remain unbroken.',
   links: [
-    {
-      name: 'Email',
-      icon: 'fa6-regular:envelope',       // Visit https://icones.js.org/ for icon codes
-                                        // You will need to install the corresponding icon set if it's not already included
-                                        // `pnpm add @iconify-json/<icon-set-name>`
-      url: 'mailto:kinholeung6119@gmail.com',
-    },
-    {
-      name: 'GitHub',
-      icon: 'fa6-brands:github',
-      url: 'https://github.com/KinhoLeung',
-    },
-    {
-      name: 'Steam',
-      icon: 'fa6-brands:steam',
-      url: 'https://steamcommunity.com/id/kinholeung',
-    },
-    {
-      name: 'Spotify',
-      icon: 'fa6-brands:spotify',
-      url: 'https://open.spotify.com/user/31gzoeut7lw4cz7v54tofk4f6m3i',
-    },
-    {
-      name: 'Discord',
-      icon: 'fa6-brands:discord',
-      url: 'https://discord.gg/bNDfCEF2Jj',
-    },
+    // {
+    //   name: 'Email',
+    //   icon: 'fa6-regular:envelope',       // Visit https://icones.js.org/ for icon codes
+    //                                     // You will need to install the corresponding icon set if it's not already included
+    //                                     // `pnpm add @iconify-json/<icon-set-name>`
+    //   url: 'mailto:kinholeung6119@gmail.com',
+    // },
+    // {
+    //   name: 'GitHub',
+    //   icon: 'fa6-brands:github',
+    //   url: 'https://github.com/KinhoLeung',
+    // },
+    // {
+    //   name: 'Steam',
+    //   icon: 'fa6-brands:steam',
+    //   url: 'https://steamcommunity.com/id/kinholeung',
+    // },
+    // {
+    //   name: 'Spotify',
+    //   icon: 'fa6-brands:spotify',
+    //   url: 'https://open.spotify.com/user/31gzoeut7lw4cz7v54tofk4f6m3i',
+    // },
+    // {
+    //   name: 'Discord',
+    //   icon: 'fa6-brands:discord',
+    //   url: 'https://discord.gg/bNDfCEF2Jj',
+    // },
   ],
 }
 
