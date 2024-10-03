@@ -35,29 +35,26 @@ const postUrl = decodeURIComponent(Astro.url.toString())
 
 <script>
 function updateSignature() {
-    const signature = document.getElementById('signature');
+    const signature = document.getElementById('signature') as HTMLImageElement;
     if (document.documentElement.classList.contains('dark')) {
         signature.src = '/favicon/signature-ElysiaValoren-dark.svg';
     } else {
         signature.src = '/favicon/signature-ElysiaValoren-light.svg';
     }
 }
+
 // 初始化时更新图片
 updateSignature();
+
 // 监听主题变化
-document.addEventListener('theme:change',updateSignature);
+document.addEventListener('theme:change', updateSignature);
 </script>
 
-<div class=`relative transition overflow-hidden bg-[var(--license-block-bg)] py-5 px-6 ${className}`>
+<div class={`relative transition overflow-hidden bg-[var(--license-block-bg)] py-5 px-6 ${className}`}>
     <div class="transition font-bold text-black/75 dark:text-white/75">
         {title}
     </div>
-    <!-- <a href={postUrl} class="link text-[var(--primary)]"> {postUrl} </a> -->
     <div class="flex gap-6 mt-2">
-        <!--<div>
-            <div class="transition text-black/30 dark:text-white/30 text-sm">{i18n(I18nKey.author)}</div>
-            <div class="transition text-black/75 dark:text-white/75 whitespace-nowrap">{profileConf.name}</div>
-        </div>-->
         <div>
             <div class="transition text-black/30 dark:text-white/30 text-sm">{i18n(I18nKey.publishedAt)}</div>
             <div class="transition text-black/75 dark:text-white/75 whitespace-nowrap">{formatDateToYYYYMMDD(pubDate)}</div>

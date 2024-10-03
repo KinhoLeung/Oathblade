@@ -6,8 +6,8 @@ import { Icon } from "astro-icon/components";
 
 <script>
 function updateFooterIcon() {
-    const footerIcon = document.getElementById('footer-icon');
-    const alistIcon = document.getElementById('alist-icon');
+    const footerIcon = document.getElementById('footer-icon') as HTMLImageElement;
+    const alistIcon = document.getElementById('alist-icon') as HTMLImageElement;
     if (document.documentElement.classList.contains('dark')) {
         footerIcon.src = '/favicon/Oathblade-dark.svg';
         alistIcon.src = '/favicon/alist-dark.svg';
@@ -16,10 +16,12 @@ function updateFooterIcon() {
         alistIcon.src = '/favicon/alist-light.svg';
     }
 }
+
 // 初始化时更新图片
 updateFooterIcon();
+
 // 监听主题变化
-document.addEventListener('theme:change',updateFooterIcon);
+document.addEventListener('theme:change', updateFooterIcon);
 </script>
 
 <div class="card-base max-w-[var(--page-width)] min-h-[4.5rem] rounded-b mx-auto px-4 pt-4 pb-4">

@@ -422,6 +422,24 @@ function scrollFunction() {
 }
 window.onscroll = scrollFunction
 
+document.documentElement.addEventListener('classChange', function(e) {
+    const event = new Event('theme:change');
+    document.dispatchEvent(event);
+});
+
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+            document.documentElement.dispatchEvent(new CustomEvent('classChange'));
+        }
+    });
+});
+
+observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class']
+});
+
 </script>
 
 <script>
