@@ -19,6 +19,24 @@ let links: NavBarLink[] = navBarConfig.links.map(
   },
 )
 ---
+
+<script>
+function updateNavbarIcon() {
+    const navbarIcon = document.getElementById('navbar-icon') as HTMLImageElement;
+    if (document.documentElement.classList.contains('dark')) {
+        navbarIcon.src = '/favicon/Oathblade-dark.svg';
+    } else {
+        navbarIcon.src = '/favicon/Oathblade-light.svg';
+    }
+}
+
+// 初始化时更新图片
+updateNavbarIcon();
+
+// 监听主题变化
+document.addEventListener('theme:change', updateNavbarIcon);
+</script>
+
 <div id="navbar" class="z-50 onload-animation">
     <div class="absolute h-8 left-0 right-0 -top-8 bg-[var(--card-bg)] transition"></div> <!-- used for onload animation -->
     <div class:list={[
@@ -26,7 +44,7 @@ let links: NavBarLink[] = navBarConfig.links.map(
         "card-base overflow-visible max-w-[var(--page-width)] h-[4.5rem] rounded-t-none mx-auto flex items-center justify-between px-4"]}>
         <a href={url('/blog/')} class="btn-plain scale-animation rounded-lg h-[3.25rem] px-5 font-bold active:scale-95">
             <div class="flex flex-row text-[var(--primary)] items-center text-md">
-                <img id="oathblade-icon" src="/favicon/Oathblade-dark.svg" alt="Oathblade Icon" class="text-[1.75rem] mb-1 mr-2 w-12 h-12" />
+                <img id="navbar-icon" src="/favicon/Oathblade-dark.svg" alt="Oathblade Icon" class="text-[1.75rem] mb-1 mr-2 w-12 h-12" />
                 {siteConfig.title}
             </div>
         </a>
