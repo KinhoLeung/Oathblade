@@ -9,7 +9,7 @@ export const LinkPresets: { [key in LinkPreset]: NavBarLink } = {
   },
   [LinkPreset.Blog]: {
     name: i18n(I18nKey.blog),
-    url: '/',
+    url: '/blog/',
   },
   [LinkPreset.About]: {
     name: i18n(I18nKey.about),
