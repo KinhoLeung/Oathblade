@@ -12,9 +12,10 @@ interface Props {
 const { headings  } = Astro.props;
 const className = Astro.props.class
 const style = Astro.props.style
-const COLLAPSED_HEIGHT = '7.5rem'
-const COLLAPSE_THRESHOLD = 5
-const isCollapsed = headings.length >= COLLAPSE_THRESHOLD
+
+// const COLLAPSED_HEIGHT = '7.5rem'
+// const COLLAPSE_THRESHOLD = 5
+// const isCollapsed = headings.length >= COLLAPSE_THRESHOLD
 const getMarginStyleFromHeading = (heading: MarkdownHeading) => {
     return `margin-left: ${(heading.depth - 1) / 2}rem`;
 }
@@ -27,7 +28,7 @@ const removeTailingHash = (text: string) => {
 }
 ---
 
-<WidgetLayout name={i18n(I18nKey.toc)} id="toc" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT}
+<WidgetLayout name={i18n(I18nKey.toc)} id="toc" 
                 class={className} style={style}
                 >
     {headings.map((heading) =>
