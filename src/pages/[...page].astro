@@ -18,6 +18,27 @@ export const getStaticPaths = (async ({ paginate }) => {
 ---
 
 <MainGridLayout>
-    <!-- <PostPage page={page}></PostPage>
+  <!-- <PostPage page={page}></PostPage>
     <Pagination class="mx-auto onload-animation" page={page} style=`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`></Pagination> -->
+  <link rel="stylesheet" href="https://images.oathblade.com/aplayer/APlayer.min.css">
+  <div id='aplayer'></div>
+  
+  <script is:inline src="https://images.oathblade.com/aplayer/APlayer.min.js"></script>
+  <script is:inline>
+    window.onload = function() {
+      const ap = new APlayer({
+        container: document.getElementById('aplayer'),
+        mini: true,
+        //fixed: true,
+        audio: [{
+          name: 'DOGFIGHT',
+          artist: 'm.o.v.e',
+          url: 'https://images.oathblade.com/aplayer/DOGFIGHT.flac',
+          cover: 'https://pub-2b4f39c0db2e4d9fadd1cd3edb431851.r2.dev/aplayer/DOGFIGHT.jpg',
+        }]
+      });
+    }
+  </script>
 </MainGridLayout>
+
+
