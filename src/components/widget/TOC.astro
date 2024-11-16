@@ -1,38 +1,75 @@
 ---
-import WidgetLayout from './WidgetLayout.astro'
 import type { MarkdownHeading } from 'astro';
-import { i18n } from '../../i18n/translation'
-import I18nKey from '../../i18n/i18nKey'
-import ButtonLink from '../control/ButtonLink.astro'
+import { siteConfig } from "../../config";
+
 interface Props {
   class?: string
-  style?: string
   headings: MarkdownHeading[]
 }
-const { headings  } = Astro.props;
-const className = Astro.props.class
-const style = Astro.props.style
-const COLLAPSED_HEIGHT = '7.5rem'
-const COLLAPSE_THRESHOLD = 5
-const isCollapsed = headings.length >= COLLAPSE_THRESHOLD
-const getMarginStyleFromHeading = (heading: MarkdownHeading) => {
-    return `margin-left: ${(heading.depth - 1) / 2}rem`;
+
+let { headings = []  } = Astro.props;
+
+// generate random headings, for testing
+// headings = [
+//     { text: 'Heading 1', depth: 1, slug: 'heading-1' },
+//     { text: 'Heading 2', depth: 2, slug: 'heading-2' },
+//     { text: 'Heading 3', depth: 3, slug: 'heading-3' },
+//     { text: 'Heading 3', depth: 3, slug: 'heading-3' },
+//     { text: 'Heading 3', depth: 3, slug: 'heading-3' },
+//     { text: 'Heading 2', depth: 2, slug: 'heading-2' },
+//     { text: 'Heading 3', depth: 3, slug: 'heading-3' },
+//     { text: 'Heading 3', depth: 3, slug: 'heading-3' },
+//     { text: 'Heading 1', depth: 1, slug: 'heading-1' },
+//     { text: 'Heading 2', depth: 2, slug: 'heading-2' },
+//     { text: 'Heading 3', depth: 3, slug: 'heading-3' },
+//     { text: 'Heading 3', depth: 3, slug: 'heading-3' },
+//     { text: 'Heading 2', depth: 2, slug: 'heading-2' },
+//     { text: 'Heading 3', depth: 3, slug: 'heading-3' },
+//     { text: 'Heading 3', depth: 3, slug: 'heading-3' },
+//     { text: 'Heading 3', depth: 3, slug: 'heading-3' },
+// ]
+
+let minDepth = 10;
+for (const heading of headings) {
+    minDepth = Math.min(minDepth, heading.depth);
 }
+
+const className = Astro.props.class
+
 const removeTailingHash = (text: string) => {
     let lastIndexOfHash = text.lastIndexOf('#');
     if (lastIndexOfHash != text.length - 1) {
         return text;
     }
+
     return text.substring(0, lastIndexOfHash);
 }
----
 
-<WidgetLayout name={i18n(I18nKey.toc)} id="toc" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT}
-                class={className} style={style}
+let heading1Count = 1;
+
+const maxLevel = siteConfig.toc.depth;
+---
+<div class:list={[className]}>
+    {headings.filter((heading) => heading.depth < minDepth + maxLevel).map((heading) =>
+            <a href={`#${heading.slug}`} class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    ">
+                <div class:list={["w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold",
+                    {
+                        "bg-[var(--toc-badge-bg)] text-[var(--btn-content)]": heading.depth == minDepth,
+                        "ml-4": heading.depth == minDepth + 1,
+                        "ml-8": heading.depth == minDepth + 2,
+                    }
+                ]}
                 >
-    {headings.map((heading) =>
-        <div style={getMarginStyleFromHeading(heading)}>
-            <ButtonLink url={`#${heading.slug}`}>{removeTailingHash(heading.text)}</ButtonLink>
-        </div>
+                    {heading.depth == minDepth && heading1Count++}
+                    {heading.depth == minDepth + 1 && <div class="w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div>}
+                    {heading.depth == minDepth + 2 && <div class="w-1.5 h-1.5 rounded-sm bg-black/5 dark:bg-white/10"></div>}
+                </div>
+                <div class:list={["text-sm", {
+                    "text-50": heading.depth == minDepth || heading.depth == minDepth + 1,
+                    "text-30": heading.depth == minDepth + 2,
+                }]}>{removeTailingHash(heading.text)}</div>
+            </a>
     )}
-</WidgetLayout>
+</div>

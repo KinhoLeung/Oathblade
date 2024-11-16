@@ -1,9 +1,26 @@
-# About
-This is the demo site for [Fuwari](https://github.com/saicaca/fuwari).
+# 关于我
+
+## 程序员
+
+## 喜欢折腾
+
+## 最近在折腾AI
+
+---
+
+# 关于本站
+
+## 2024年8月建站，使用了 [Fuwari](https://fuwari.vercel.app/) 这个博客模板，我在此基础上进行了一些修改并且重新命名为 [Oathblade](https://www.oathblade.com/)。
+
+### Fuwari源码：
 
 ::github{repo="saicaca/fuwari"}
 
-> ### Sources of images used in this site
-> - [Unsplash](https://unsplash.com/)
-> - [星と少女](https://www.pixiv.net/artworks/108916539) by [Stella](https://www.pixiv.net/users/93273965)
-> - [Rabbit - v1.4 Showcase](https://civitai.com/posts/586908) by [Rabbit_YourMajesty](https://civitai.com/user/Rabbit_YourMajesty)
+### Oathblade源码：
+
+::github{repo="KinhoLeung/Oathblade"}
+
+> ### 本站使用的图片来源
+>
+> - [剣よ、私に力を与えてください](https://www.pixiv.net/artworks/107557137) by [Yue](https://www.pixiv.net/users/93308475)
+> - [Sword altar](https://game-icons.net/1x1/delapouite/sword-altar.html) by [GameIcons](https://github.com/game-icons/icons)

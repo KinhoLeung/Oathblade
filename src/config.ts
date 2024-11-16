@@ -10,7 +10,7 @@ import type { GiscusProps } from "@giscus/svelte";
 export const siteConfig: SiteConfig = {
   title: 'Oathblade',
   subtitle: 'Demo Site',
-  lang: 'en',         // 'en', 'zh_CN', 'zh_TW', 'ja', 'ko'
+  lang: 'zh_CN',         // 'en', 'zh_CN', 'zh_TW', 'ja', 'ko'
   themeColor: {
     hue: 250,         // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
     fixed: true,     // Hide the theme color picker for visitors
@@ -43,6 +43,11 @@ export const navBarConfig: NavBarConfig = {
     LinkPreset.Home,
     LinkPreset.Archive,
     LinkPreset.About,
+    // {
+    //   name: 'GitHub',
+    //   url: 'https://github.com/KinhoLeung',     // Internal links should not include the base path, as it is automatically added
+    //   external: true,                               // Show an external link icon and will open in a new tab
+    // },
     {
       name: 'AList',
       url: 'https://alist.oathblade.com/',     // Internal links should not include the base path, as it is automatically added
@@ -91,6 +96,6 @@ export const GISCUS: GiscusProps = {
   reactionsEnabled: "0",
   emitMetadata: "0",
   inputPosition: "top",
-  lang: "en",
+  lang: "zh-CN",
   loading: "lazy",
 };
