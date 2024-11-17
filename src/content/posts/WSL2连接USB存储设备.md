@@ -1,7 +1,7 @@
 ---
 title: WSL2连接USB存储设备
 published: 2024-08-19
-updated: 2024-11-14
+# updated: 2024-11-14
 description: '本文详细介绍了如何在WSL2环境中连接USB存储设备,解决了WSL2无法直接访问宿主机USB设备和内核缺少USB存储设备驱动的问题。通过使用usbipd-win工具和重新编译WSL2内核,实现了USB设备在WSL2中的成功挂载。'
 image: ''
 tags: [WSL2, USB]
